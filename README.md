@@ -6,7 +6,7 @@ Solr Charm for deployment of Apache Solr to Juju.
 
 Step by step instructions on using the charm:
 
-    juju deploy cs:~apachesoftwarefoundation/solr
+    juju deploy cs:~apachesoftwarefoundation/solr --channel edge
     juju deploy openjdk
     juju add-relation openjdk solr
     juju expose solr

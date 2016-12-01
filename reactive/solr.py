@@ -18,7 +18,7 @@ def install_solr():
 def run_solr(java):
    hookenv.open_port('8983')
    check_output(['/opt/solr-6.3.0/bin/solr', 'start', '-force'])
-   status_set('running', 'Solr Running.')
+   status_set('active', 'Solr Running.')
    set_state('solr.running')
 
 

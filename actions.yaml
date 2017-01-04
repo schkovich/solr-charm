@@ -1,0 +1,16 @@
+createcloudcollection:
+  description: Add a cloud collection
+  params:
+    name:
+      type: string
+      description: The collection name
+    confdir:
+       type: string
+       description: The configuration directory
+    shards:
+       type: integer
+       description: Shard count
+    replicas:
+       type: integer
+       description: Replica count
+  required: ['name', 'confdir', 'shards', 'replicas']

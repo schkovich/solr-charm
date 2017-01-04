@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+
+from charmhelpers.core.hookenv import relation_ids, relation_id, related_units, relation_get, action_get, config
+from subprocess import check_output
+
+name = action_get('name')
+confdir = action_get('confdir')
+shards = action_get('shards')
+replicas = action_get('replicas')
+
+rep = ""
+if replicas:
+    rep = "-rf "+replicas
+
+check_output(['su','solr','-c','/opt/solr/bin/solr', 'create', '-c', name, '-d', confdir, '-s', shards, rep])

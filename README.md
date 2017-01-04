@@ -1,12 +1,13 @@
 # Overview
 
 Solr Charm for deployment of Apache Solr to Juju.
+Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene.
 
 # Usage
 
 Step by step instructions on using the charm:
 
-    juju deploy cs:~apachesoftwarefoundation/solr --channel edge
+    juju deploy cs:~spiculecharms/apache-solr
     juju deploy openjdk
     juju add-relation openjdk solr
     juju expose solr
@@ -15,15 +16,21 @@ You can then browse to http://ip-address:8983 to configure the service.
 
 ## Scale out Usage
 
-If the charm has any recommendations for running at scale, outline them in
-examples here. For example if you have a memcached relation that improves
-performance, mention it here.
+You can also run Solr in SolrCloud mode by attaching it to zookeeper
+
+    juju deploy apache-zookeeper
+    juju add-relation apache-zookeeper solr
+    juju config solr solrcloud=true
 
 ## Known Limitations and Issues
 
-Currently doesn't scale, SolrCloud support coming soon.
+Probably lots.
 
 # Configuration
+
+## SolrCloud
+
+This is the scalable version of Solr, to enable it you need to set this configuration option then connect it to a zookeeper quorum.
 
 # Contact Information
 
@@ -31,7 +38,7 @@ Contact the developers here:
 
 ## Upstream Project Name
 
-  - https://launchpad.net/~apachesoftwarefoundation
+  - https://launchpad.net/~spiculecharms
   - https://github.com/buggtb/solr-charm/issues
   - tom@spicule.co.uk
 

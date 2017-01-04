@@ -1,2 +1,2 @@
-includes: ['layer:basic', 'interface:java']  # if you use any interfaces, add them here
+includes: ['layer:basic', 'interface:java', 'interface:zookeeper', 'interface:solr-interface']
 repo: git@github.com:buggtb/solr-charm.git

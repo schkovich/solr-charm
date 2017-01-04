@@ -4,13 +4,16 @@ maintainer: Tom Barber <Tom.Barber@tom-laptop2>
 description: |
   <Multi-line description here>
 tags:
-  # Replace "misc" with one or more whitelisted tags from this list:
-  # https://jujucharms.com/docs/stable/authors-charm-metadata
   - misc
 subordinate: false
 provides:
   java:
     interface: java
     scope: container
+  solr-interface:
+    interface: solr-interface
+requires:
+  zookeeper:
+    interface: zookeeper
 series: 
     - xenial

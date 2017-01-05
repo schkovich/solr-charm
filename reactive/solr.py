@@ -72,7 +72,7 @@ def run_solr(zookeeper, java):
         check_output(['su','solr','-c','/opt/solr/bin/solr start -c -p 8983 -z '+zklist])
         status_set('active', 'Solr Cloud Running')
         set_state('solrcloud.running')
-    elif (charmstatus[1] != 'Solr Running(No Cloud)'):
+    elif not solrcloud and (charmstatus[1] != 'Solr Running(No Cloud)'):
         call(['su','solr','-c','/opt/solr/bin/solr stop'])
         check_output(['su','solr','-c','/opt/solr/bin/solr start'])
         status_set('active', 'Solr Running(No Cloud)')

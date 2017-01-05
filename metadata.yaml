@@ -1,4 +1,4 @@
-name: solr
+name: apache-solr
 summary: Solr Charm for deployment of Apache Solr to Juju.
 maintainer: Tom Barber <tom@spicule.co.uk>
 description: Build for search,  Solr provides scalable search services using an easy to use REST interface to extract the data.

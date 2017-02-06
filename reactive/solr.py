@@ -10,7 +10,7 @@ au = ArchiveUrlFetchHandler()
 @when_not('solr.installed')
 def install_solr():
     adduser('solr')
-    au.download("http://apache.claz.org/lucene/solr/6.3.0/solr-6.3.0.tgz", "/tmp/solr.tgz")
+    au.download("http://archive.apache.org/dist/lucene/solr/6.3.0/solr-6.3.0.tgz", "/tmp/solr.tgz")
     mkdir('/opt/solr')
     check_output(['tar', 'xvfz', "/tmp/solr.tgz", '-C', "/opt/solr", '--strip-components=1'])
     chownr('/opt/solr', 'solr', 'solr', chowntopdir=True)

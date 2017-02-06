@@ -10,7 +10,7 @@ provides:
     interface: java
     scope: container
   solr-interface:
-    interface: solr-interface
+    interface: solr
 requires:
   zookeeper:
     interface: zookeeper

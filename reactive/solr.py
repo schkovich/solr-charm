@@ -1,7 +1,7 @@
 from charms.reactive import when, when_not, set_state
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 from subprocess import check_call, CalledProcessError, call, check_output
-from charmhelpers.core.hookenv import status_set, log, status_get
+from charmhelpers.core.hookenv import status_set, log, status_get, config
 from charmhelpers.core import hookenv
 from charmhelpers.core.host import adduser, chownr, mkdir
 
@@ -9,8 +9,9 @@ au = ArchiveUrlFetchHandler()
 
 @when_not('solr.installed')
 def install_solr():
+    version = config('solr_version')
     adduser('solr')
-    au.download("http://archive.apache.org/dist/lucene/solr/6.3.0/solr-6.3.0.tgz", "/tmp/solr.tgz")
+    au.download("http://archive.apache.org/dist/lucene/solr/{0}/solr-{0}.tgz".format(version), "/tmp/solr.tgz")
     mkdir('/opt/solr')
     check_output(['tar', 'xvfz', "/tmp/solr.tgz", '-C', "/opt/solr", '--strip-components=1'])
     chownr('/opt/solr', 'solr', 'solr', chowntopdir=True)

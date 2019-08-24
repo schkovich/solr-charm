@@ -14,3 +14,5 @@ createcloudcollection:
        type: integer
        description: Replica count
   required: ['name', 'confdir', 'shards', 'replicas']
+status:
+  description: Get Solr instance status.

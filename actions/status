@@ -1,0 +1,13 @@
+#!/usr/local/sbin/charm-env python3
+
+import json
+from subprocess import run, PIPE
+from charmhelpers.core.hookenv import action_set
+from subprocess import run, PIPE
+
+data=run(["sudo", "-u", "solr", "/opt/solr/bin/solr", "status"], stdout=PIPE, stderr=PIPE, encoding='utf-8').stdout.splitlines()
+result=list(filter(None, data))
+result_json=result[2]+result[3]+result[4]+result[5]+result[6]+result[7]
+result_dict=json.loads(result_json.replace("solr_home", "solr-home").replace("startTime", "start-time"))
+result_dict["info"]=result[0]+result[1]
+action_set(result_dict)

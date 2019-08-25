@@ -1,13 +1,18 @@
-#!/usr/local/sbin/charm-env python3
+#!/bin/bash
 
-import json
-from subprocess import run, PIPE
-from charmhelpers.core.hookenv import action_set
-from subprocess import run, PIPE
-
-data=run(["sudo", "-u", "solr", "/opt/solr/bin/solr", "status"], stdout=PIPE, stderr=PIPE, encoding='utf-8').stdout.splitlines()
-result=list(filter(None, data))
-result_json=result[2]+result[3]+result[4]+result[5]+result[6]+result[7]
-result_dict=json.loads(result_json.replace("solr_home", "solr-home").replace("startTime", "start-time"))
-result_dict["info"]=result[0]+result[1]
-action_set(result_dict)
+out=$(sudo -u solr /opt/solr/bin/solr status 2>/dev/null|grep -E '^No|^Found|^Solr|^\s'|sed 's/["},]//g'|sed 's/:/: /g')
+readarray <<<$out
+for (( i=0; i<${#MAPFILE[@]}; i++ ))
+do
+  line=$(echo "${MAPFILE[$i]}"|sed 's/\\n//g'|awk '{$1=$1};1')
+# todo: In Python 3.7 insertion will be default and the commented code will produce nicer output.
+# See https://mail.python.org/pipermail/python-dev/2017-December/151283.html
+#  if [[ ${i} -eq 0 ]]; then
+#    arg="output.nodes"
+#  elif [[ ${i} -eq 1 ]]; then
+#    arg="output.process"
+#  else
+#    arg="output.${i}"
+#  fi
+  action-set "output.${i}"="${line}"
+done

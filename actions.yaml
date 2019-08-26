@@ -16,3 +16,16 @@ createcloudcollection:
   required: ['name', 'confdir', 'shards', 'replicas']
 status:
   description: Get Solr instance status.
+stop:
+  description: Stop desired Solr nodes.
+  params:
+    port:
+      type: integer
+      description: |
+        Specify the port the Solr HTTP listener is bound to.
+        In multi-node environement, if no port is specified all purameter must be given.
+    all:
+      type: string
+      enum: [y]
+      description: Find and stop all running Solr servers on this host.
+  additionalProperties: false

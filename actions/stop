@@ -1,0 +1,27 @@
+#!/bin/bash
+
+port=$(action-get port)
+all=$(action-get all)
+
+if [ "${port:-0}" -gt "0" ]; then
+  port="-p ${port}"
+else
+  port=""
+fi
+
+if [ "$all:-" = "y" ]; then
+  all="-all"
+else
+  all=""
+fi
+
+command="sudo -u solr /opt/solr/bin/solr stop ${port}${all}"
+out=$($command  2>/dev/null)
+readarray <<<$out
+
+if [[ $? -ne 0 ]]; then
+  action-fail "output"="${MAPFILE[0]}"
+else
+  action-set "result.output"="${MAPFILE[0]}"
+  action-set "result.status"="Requested node(s) stoppped."
+fi

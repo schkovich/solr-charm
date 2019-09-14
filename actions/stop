@@ -9,11 +9,12 @@ else
   port=""
 fi
 
-if [ "$all:-" = "y" ]; then
+if [ "${all:-False}" = True ]; then
   all="-all"
 else
   all=""
 fi
+
 
 command="sudo -u solr /opt/solr/bin/solr stop ${port}${all}"
 out=$($command  2>/dev/null)
@@ -22,6 +23,10 @@ readarray <<<$out
 if [[ $? -ne 0 ]]; then
   action-fail "output"="${MAPFILE[0]}"
 else
+#for (( i=0; i<${#MAPFILE[@]}; i++ ))
+#  do
+#    line=$(echo "${MAPFILE[$i]}"|sed 's/\\n//g'|awk '{$1=$1};1')
+#    action-set "output.${i}"="${line}"
+#  done
   action-set "result.output"="${MAPFILE[0]}"
-  action-set "result.status"="Requested node(s) stoppped."
 fi

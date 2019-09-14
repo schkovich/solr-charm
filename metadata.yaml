@@ -16,5 +16,5 @@ requires:
   zookeeper:
     interface: zookeeper
 series: 
-    - xenial
     - bionic
+    - xenial
